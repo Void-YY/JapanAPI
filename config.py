@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 # 加载 .env 文件中的环境变量
 load_dotenv()
+print(os.getenv('MONGO_URI'))
 class Config:
     GRAPHQL_URL = os.getenv('GRAPHQL_URL')
     MONGO_URI = os.getenv('MONGO_URI')

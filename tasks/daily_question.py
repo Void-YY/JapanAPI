@@ -6,7 +6,7 @@ from datetime import datetime, timedelta, tzinfo
 from services.leetcode_service import get_daily_question_data
 from pymongo import MongoClient
 import threading
-from . import config
+from config import config
 
 # MongoDB连接配置
 client = MongoClient(config.MONGO_URI)
