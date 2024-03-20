@@ -15,6 +15,10 @@ async def get_daily_question_api():
         graphql_client = GraphQLClient(config.GRAPHQL_URL)
         leetcode_service = LeetCodeService(mongo_repo, graphql_client)
         data = leetcode_service.get_daily_question_data()
+        # 删除_id字段
+        if '_id' in data:
+            del data['_id']
+
         return data
     except LeetCodeException as e:
         return {"error": str(e)}

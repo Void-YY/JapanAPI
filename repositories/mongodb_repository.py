@@ -2,8 +2,6 @@
 import logging
 from pymongo import MongoClient
 from config import config
-from bson import json_util
-import json
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +13,6 @@ class MongoDBRepository:
 
     def save_data(self, data):
         try:
-            json.loads(json_util.dumps(data))
             self.collection.delete_one({"question_slug": data["question_slug"]})
             self.collection.insert_one(data)
             logger.info(f"Successfully saved daily question data to MongoDB: {data['question_slug']}")

@@ -2,8 +2,6 @@
 from fastapi import FastAPI
 import json
 from bson import ObjectId
-from fastapi import FastAPI
-from fastapi.responses import JSONResponse
 from typing import Any
 from apis.daily_question import router as daily_question_router
 from repositories.mongodb_repository import MongoDBRepository
