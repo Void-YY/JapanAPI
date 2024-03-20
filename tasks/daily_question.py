@@ -3,10 +3,10 @@ import schedule
 import time
 import re
 from datetime import datetime, timedelta, tzinfo
-from services.leetcode import get_daily_question_data
+from services.leetcode_service import get_daily_question_data
 from pymongo import MongoClient
 import threading
-from config import config
+from . import config
 
 # MongoDB连接配置
 client = MongoClient(config.MONGO_URI)

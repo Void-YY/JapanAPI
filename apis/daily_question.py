@@ -1,10 +1,22 @@
+# apis/daily_question.py
 from fastapi import APIRouter
-from services.leetcode import get_daily_question_data
+from services.leetcode_service import LeetCodeService
+from repositories.mongodb_repository import MongoDBRepository
+from graphql_client import GraphQLClient
+from config import config
+from exceptions import LeetCodeException
 
-# 创建路由对象
 router = APIRouter()
 
-# 定义API路由,返回每日一题数据
 @router.get("/daily-question")
-def get_daily_question_api():
-    return get_daily_question_data()
+async def get_daily_question_api():
+    try:
+        mongo_repo = MongoDBRepository()
+        graphql_client = GraphQLClient(config.GRAPHQL_URL)
+        leetcode_service = LeetCodeService(mongo_repo, graphql_client)
+        data = leetcode_service.get_daily_question_data()
+        return data
+    except LeetCodeException as e:
+        return {"error": str(e)}
+    except Exception as e:
+        return {"error": "An unexpected error occurred."}

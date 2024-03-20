@@ -1,3 +1,4 @@
+# utils\graphql.py
 import requests
 
 def send_leetcode_graphql_request(query, variables):
